@@ -10,7 +10,9 @@ jobs:
           command: gem install td
       - run:
           name: Check workflow
-          command: td wf check
+          command: |
+            td apikey:set ${TD_APIKEY}
+            td wf check
 
 workflows:
   version: 2
