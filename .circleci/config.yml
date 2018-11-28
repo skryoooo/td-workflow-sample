@@ -6,17 +6,28 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install td client
-          command: gem install td
-      - run:
-          name: Check workflow
+          name: Install td client and setup
           command: |
+            gem install td
             td apikey:set ${TD_APIKEY}
             echo Y | td wf
-            td wf check
+      - run: td wf check
+  deploy:
+    docker:
+      - image: circleci/ruby
+    steps:
+      - checkout
+      - run:
+          name: Install td client and setup
+          command: |
+            gem install td
+            td apikey:set ${TD_APIKEY}
+            echo Y | td wf
+      - run: td wf push kawa_test
 
 workflows:
   version: 2
   test_and_deploy:
     jobs:
       - test
+      - deploy
