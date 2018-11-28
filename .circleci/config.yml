@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/ruby
+    steps:
+      - checkout
+      - run:
+          name: Install td client
+          command: gem install td
+      - run:
+          name: Check workflow
+          command: td wf check
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
