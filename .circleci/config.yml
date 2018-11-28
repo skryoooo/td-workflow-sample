@@ -17,9 +17,7 @@ jobs:
 workflows:
   version: 2
   check_and_deploy:
-    jobs:
-      - check_and_deploy:
-        filters:
-          branches:
-            only:
-              - production
+    filters:
+      branches:
+        only:
+          - production
