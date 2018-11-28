@@ -12,7 +12,7 @@ jobs:
           name: Check workflow
           command: |
             td apikey:set ${TD_APIKEY}
-            yes td wf
+            td wf
             td wf check
 
 workflows:
